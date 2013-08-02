@@ -27,55 +27,27 @@ public class LevelHealth extends JavaPlugin implements Listener {
  
 @EventHandler
     public void onPlayerXPLevelChange(PlayerLevelChangeEvent event) {
-     if (getConfig().getBoolean("use-permissions") == true) {
-    		if (event.getPlayer().hasPermission("levelhealth.use")) {
-    			final Player player = event.getPlayer();
-    			getServer().getScheduler().runTaskLater(this, new Runnable() {
+        final Player player = event.getPlayer();
+        getServer().getScheduler().runTaskLater(this, new Runnable() {
     				public void run() {
     					scaleHealth(player);
     				}
     			}, 1);
-    		return;
-    		}
-    		else {
-    			return;
-    		}
-    	}
-    	else {
-    		final Player player = event.getPlayer();
-    		getServer().getScheduler().runTaskLater(this, new Runnable() {
-    			public void run() {
-    				scaleHealth(player);
-    			}
-    		}, 1);
-    		return;
-    	}
     }
     
     @EventHandler(ignoreCancelled=true)
     public void onPlayerJoin(PlayerJoinEvent event) {
-     if (getConfig().getBoolean("use-permissions") == true) {
-    		if (event.getPlayer().hasPermission("levelhealth.use")) {
-    			scaleHealth(event.getPlayer());
-    			return;
-    		}
-    		else {
-    			return;
-    		}
-    	}
-    	else {
-    		scaleHealth(event.getPlayer());
-    		return;
-    	}
-
+        scaleHealth(event.getPlayer());
     }
  
     private void scaleHealth(Player player) {
-        int lvl = player.getLevel();
-        int maxHP = 20;
-        if (maxHPConfig.containsKey(lvl)) {
-            maxHP = maxHPConfig.get(lvl);
+        if (player.hasPermission("levelhealth.use") || !getConfig().getBoolean("use-permissions")) {
+            int lvl = player.getLevel();
+            int maxHP = 20;
+            if (maxHPConfig.containsKey(lvl)) {
+                maxHP = maxHPConfig.get(lvl);
+            }
+            player.setMaxHealth(maxHP);
         }
-        player.setMaxHealth(maxHP);
     }
 }
