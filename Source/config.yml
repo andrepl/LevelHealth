@@ -1,3 +1,5 @@
+# Whether or not to use levelhealth.use for permission, if false everyone is affected by levelhealth.
+use-permissions: false
 max-hp-per-level:
   0: 20
   1: 21
