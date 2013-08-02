@@ -1,4 +1,8 @@
 name: LevelHealth
 main: com.gmail.ngglover.levelhealth.LevelHealth
 author: NathanG
-version: 0.0.1
+version: 1.0
+permisions:
+  levelhealth.use:
+    default: none
+    description: Allows you to use the plugin.
