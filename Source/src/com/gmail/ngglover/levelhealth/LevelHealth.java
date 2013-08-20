@@ -1,6 +1,9 @@
 package com.gmail.ngglover.levelhealth;
  
  
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,7 +23,19 @@ public class LevelHealth extends JavaPlugin implements Listener {
         saveDefaultConfig();
         reloadConfig();
     }
- 
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (command.getName().equalsIgnoreCase("levelhealth")) {
+            if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+                reloadConfig();
+                sender.sendMessage(ChatColor.GOLD + "[LevelHealth] " + ChatColor.WHITE + "Configuration Reloaded.");
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void reloadConfig() {
         super.reloadConfig();

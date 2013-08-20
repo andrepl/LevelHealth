@@ -2,6 +2,12 @@ name: LevelHealth
 main: com.gmail.ngglover.levelhealth.LevelHealth
 author: NathanG
 version: 1.0
+commands:
+  levelhealth:
+    aliases: [lvlhealth, lh]
+    usage: /<command> reload
+    description: reload the config file.
+    permission: levelhealth.admin
 permisions:
   levelhealth.use:
     default: none
